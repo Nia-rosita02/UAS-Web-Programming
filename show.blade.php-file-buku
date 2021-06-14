@@ -1,0 +1,67 @@
+@extends('layouts.layout')
+@section('content')
+<div class="row">
+    <div class="col-md-6">
+        <h1>Data Buku</h1>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+                <div class="card-body">
+                    <form action="{{route('bukuUpdate',['id'=>$buku->id])}}" method="POST" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <input name="id" type="hidden" value="{{$buku->id}}">
+                        <div class="form-group">
+                            <label for="firstname">Kode Buku</label>
+                            <input name="id" type="text" value="{{$buku->id}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Kode Buku" disabled>
+                        </div>      
+                        <div class="form-group">
+                            <label for="firstname">Judul Buku</label>
+                            <input name="nama_buku" type="text" value="{{$buku->nama_buku}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Judul Buku">
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname">Nama Penerbit</label>
+                            <input name="penerbit" type="text" value="{{$buku->penerbit}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Penerbit">
+                        </div>
+                        <div class="form-group">
+                        <label for="exampleFormControlSelect1">Kategori</label>
+                                <select name="kategori" value="{{$buku->kategori}}" class="form-control" id="exampleFormControlSelect1">
+                                    <option value="1">Novel</option>
+                                    <option value="2">Komik</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                                <label for="exampleFormControlSelect1">Genre</label>
+                                <select name="genre" value="{{$buku->genre}}" class="form-control" id="exampleFormControlSelect1">
+                                    <option value="1">Agama Islam</option>
+                                    <option value="2">Romance</option>
+                                    <option value="3e">Comedy</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname">Harga</label>
+                            <input name="harga" type="text" value="{{$buku->harga}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Harga">
+                        </div>
+                </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+            <div class="card">
+                    <div class="card-body">
+                            <div class="form-group">
+                                <label for="firstname">Cover Buku</label><br />
+                                <img src="{{asset('gambar/'.$buku->gambar)}}" width="100px" alt="cover buku">
+                                <input name="gambar" type="file" class="form-control">
+                                *)Abaikan jika tidak ingin mengganti cover buku
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+        </div>
+</div>   
+@endsection
