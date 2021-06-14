@@ -1,0 +1,104 @@
+@extends('layouts.layout')
+
+@section('content')
+<div class="row">
+    <div class="col-md-12">
+        <h1>Data Transaksi Pembelian Buku</h1>
+    </div>
+</div>
+<hr />
+<div class="row">    
+            <div class="col-md-6">
+                <form action="{{route('beliStore')}}" method="POST">
+                    {{ csrf_field() }}
+                        <div class="form-group">
+                                <label for="firstname">Tanggal Pembelian</label>
+                                <input class="form-control" type="date" name="tanggal" id="">
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname">Nama Konsumen</label>
+                            <select class="form-control" name="konsumen_id">
+                                <option value="0">--Pilih Konsumen--</option>
+                                @foreach ($konsumen as $k)
+                                    <option value="{{$k->id}}">{{$k->nama_konsumen}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname">Kategori Buku</label>
+                            <select class="form-control" name="buku_id">
+                                <option value="0">--Pilih Kategori--</option>
+                                @foreach ($buku as $b)
+                                    <option value="{{$b->id}}">{{$b->kategori}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname">Judul Buku</label>
+                            <select class="form-control" name="buku_id"> 
+                                <option value="0">--Pilih Buku--</option>
+                                @foreach ($buku as $b)
+                                    <option value="{{$b->id}}">{{$b->nama_buku}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+            </div>
+            <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="firstname">Harga Buku</label>
+                            <textarea class="form-control" name="harga" id="buku_id" cols="30" rows="2" 
+                            value="{{$b->id}}">{{$b->harga}}  
+                            </textarea>
+                           
+                           
+                        </div>  
+                        <div class="form-group">
+                            <label for="firstname">Jumlah beli</label>
+                            <input name="jumlah_beli" type="text" cols="30" row="2" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <textarea class="form-control" name="hukuman" id="" cols="30" rows="2"></textarea>
+                        </div>    
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-lg btn-danger col-md-12">Add</button>
+                        </div>
+                </form>      
+            </div>                
+</div>
+<hr />
+<div class="card">
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>No</th>
+                    <th class="text-center">Nama Konsumen</th>
+                    <th class="text-center">Judul Buku</th>
+                    <th class="text-center">Harga</th>
+                    <th class="text-center">Jumlah buku</th>
+                    <th class="text-center">Jumlah Total Bayar</th>
+                    <th class="text-center">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php
+                    $i=1;
+                @endphp
+                @foreach ($buku as $b)
+                    <tr>
+                        <td>{{ $i }}</td>
+                        <td>{{ $b->nama_buku }}</td>
+                        
+                        <td class="text-center">
+                        <a href="{{route('beliShow',['id'=>$b->id])}}" class="btn btn-success">View</a>&nbsp;
+                        </td>
+                    </tr>
+                    @php
+                        $i++;
+                    @endphp
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+    
+@endsection
