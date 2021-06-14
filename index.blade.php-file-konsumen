@@ -1,0 +1,93 @@
+@extends('layouts.layout')
+
+@section('content')
+<div class="row">
+    <div class="col-md-6">
+        <h1>Data Konsumen</h1>
+    </div>
+    <div class="col-md-6">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
+            + Add Data Konsumen
+        </button>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <form class="form-inline my-2 my-lg-0" method="GET" action="{{route('konsumenIndex')}}">
+                    <input class="form-control mr-sm-2" name='cari' type="search" placeholder="Search Data" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </nav>
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>No</th>
+                    <th class="text-center">Nama Lengkap</th>
+                    <th class="text-center">Alamat</th>
+                    <th class="text-center">No Handphone</th>
+                    <th class="text-center">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php
+                    $i = 1;
+                @endphp
+                @foreach ($konsumen as $k)
+                    <tr>
+                        <td>{{$i}}</td>
+                        <td>{{$k->nama_konsumen}}</td>
+                        <td>{{$k->alamat}}</td>
+                        <td>{{$k->no_hp}}</td>
+                        <td class="text-center">
+                            <a href="{{route('konsumenShow',['id'=>$k->id])}}" class="btn btn-warning">Edit</a>
+                            <a href="{{route('konsumenDestroy',['id'=>$k->id])}}" class="btn btn-danger" onCLick="return confirm('Anda yakin ingin menghapus data ini?')">Delete</a>
+                        </td>
+                    </tr>
+                    @php
+                        $i++;
+                    @endphp
+                @endforeach
+            </tbody>
+
+        </table>
+    </div>
+</div>
+    
+    
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Input Data Konsumen</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+                <form action="konsumen/store" method="POST">
+                    {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="firstname">Nama Lengkap</label>
+                            <input name="nama_konsumen" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Lengkap Konsumen">
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname">Alamat</label>
+                            <input name="alamat" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Alamat Konsumen">
+                        </div> 
+                        <div class="form-group">
+                            <label for="firstname">No Handphone</label>
+                            <input name="no_hp" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nomor Handphone">
+                        </div>          
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Tambah</button>
+        </div>
+    </form>
+    </div>
+</div>
+
+@endsection
