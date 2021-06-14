@@ -1,0 +1,35 @@
+@extends('layouts.layout')
+@section('content')
+<div class="row">
+    <div class="col-md-6">
+        <h1>Data Konsumen</h1>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+                <div class="card-body">
+                    <form action="{{route('konsumenUpdate',['id'=>$konsumen->id])}}" method="POST" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <input name="id" type="hidden" value="{{$konsumen->id}}">
+                        <div class="form-group">
+                            <label for="firstname">Nama Lengkap</label>
+                            <input name="nama_konsumen" type="text" value="{{$konsumen->nama_konsumen}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Lengkap Konsumen" disabled>
+                        </div>      
+                        <div class="form-group">
+                            <label for="firstname">Alamat</label>
+                            <input name="alamat" type="text" value="{{$konsumen->alamat}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Alamat Konsumen">
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname">No Handphone</label>
+                            <input name="no_hp" type="text" value="{{$konsumen->no_hp}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nomor Handphone">
+                        </div>
+                        <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Update</button>
+                        </div>
+                </div>
+        </div>
+    </div>
+</div>   
+@endsection
